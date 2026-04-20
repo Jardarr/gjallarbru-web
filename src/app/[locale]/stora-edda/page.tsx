@@ -59,16 +59,22 @@ export const viewport: Viewport = {
     maximumScale: 1,
     userScalable: false,
 };
+
 export default function StoraEdda() {
     return (
-        <main className="flex items-center justify-center text-sm md:text-base min-h-screen sm:h-fit">
-            <div className="flex flex-col justify-center w-[600px] rounded-md h-full p-4 my-20">
-                <div className="m-8 text-3xl sea-color text-center font-bold">
-                    <h1>Stóra Edda</h1>
-                    <h2>Большая Эдда</h2>
+        <main className="flex min-h-screen justify-center px-4 pb-12 pt-24 text-sm md:px-6 md:text-base">
+            <div className="flex w-full max-w-2xl flex-col justify-center rounded-md py-4">
+                <div className="mb-8 text-center">
+                    <h1 className="font-serif text-3xl leading-tight text-foreground md:text-4xl">
+                        Stóra Edda
+                    </h1>
+                    <h2 className="mt-2 text-lg text-muted-foreground md:text-xl">
+                        Большая Эдда
+                    </h2>
                 </div>
-                <div className="flex items-center flex-col mt-5">
-                    <div className="-z-10">
+
+                <div className="flex flex-col items-center">
+                    <div className="overflow-hidden rounded-xl border border-border bg-card p-3 shadow-sm">
                         <ImageWithSkeleton
                             width={300}
                             height={400}
@@ -76,15 +82,18 @@ export default function StoraEdda() {
                             alt="Stóra Edda"
                         />
                     </div>
-                    <div className="mt-5 text-sm">
-                        <p className="mb-2">
+
+                    <div className="mt-6 w-full rounded-xl border border-border bg-card p-5 text-card-foreground shadow-sm md:p-6">
+                        <p className="mb-3 leading-7 text-foreground/90">
                             Лучшее на данный момент русскоязычное издание за
                             авторством Eyvar Tjörvason
                         </p>
-                        <p className="mb-2">
+
+                        <p className="mb-4 leading-7 text-muted-foreground">
                             Вот что говорит автор сборника о своём труде:
                         </p>
-                        <p className="italic bg-neutral-400/70 rounded-md p-4">
+
+                        <p className="rounded-lg border border-border bg-muted p-4 italic leading-7 text-foreground/90">
                             &quot;Эта книга является попыткой собрать под одной
                             обложкой как можно большее число важнейших древних
                             текстов, связанных с германо-скандинавской
@@ -95,7 +104,8 @@ export default function StoraEdda() {
                             языке&quot;.
                         </p>
                     </div>
-                    <button className="my-5 py-2 px-2 bg-[#203E51] hover:border-sky-400 text-neutral-200 border border-transparent transition-all duration-300 ease-in-out rounded-md">
+
+                    <button className="mt-6 rounded-md border border-border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90">
                         <Link
                             href="https://drive.google.com/file/d/17G-EKf-ZNxHwrE-l-HRunFETvLExbLIY/view?usp=drive_link"
                             target="_blank"

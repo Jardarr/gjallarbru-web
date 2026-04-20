@@ -15,25 +15,25 @@ export default function Header() {
     const headerLinks = getHeaderLinks(locale);
 
     return (
-        <header className="absolute inset-x-0 top-0 z-50 w-full bg-amber-50/50 px-4 py-2 shadow-lg backdrop-blur-lg dark:bg-zinc-900/20 md:px-24">
+        <header className="absolute inset-x-0 top-0 z-50 w-full border-b border-border/50 bg-background/70 px-4 py-2 backdrop-blur-md md:px-24">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
                     <Link href="/" aria-label="Главная страница Gjallarbru">
                         <Image
-                            className="mx-2 w-4"
+                            className="mx-2 h-5 w-auto opacity-80 transition-opacity hover:opacity-100"
                             src="/thmr.svg"
-                            width={150}
-                            height={30}
+                            width={24}
+                            height={24}
                             alt="Логотип Gjallarbru"
                         />
                     </Link>
 
-                    <span className="font-Goth w-10 text-xs/3 uppercase sm:w-auto sm:text-xl">
+                    <span className="font-Goth w-10 text-xs/3 uppercase tracking-wide text-foreground sm:w-auto sm:text-xl">
                         GJALLARBRU
                     </span>
                 </div>
 
-                <nav className="flex items-center md:my-4 lg:my-0">
+                <nav className="flex items-center">
                     <div className="hidden md:flex md:items-center md:gap-4">
                         {headerLinks.map((link) => {
                             const isActive =
@@ -50,8 +50,8 @@ export default function Header() {
                                     className={[
                                         "group relative px-1 py-1 text-sm font-medium transition-colors",
                                         isActive
-                                            ? "text-neutral-900 dark:text-neutral-100"
-                                            : "text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100",
+                                            ? "text-foreground"
+                                            : "text-muted-foreground hover:text-foreground",
                                     ].join(" ")}
                                 >
                                     {link.text}

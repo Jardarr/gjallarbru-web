@@ -63,21 +63,25 @@ export const viewport: Viewport = {
 
 export default function Poetry() {
     return (
-        <main className="flex items-center justify-center text-sm md:text-base min-h-screen sm:h-fit">
-            <div className="flex justify-center items-center flex-col w-[600px] rounded-md mt-32">
-                <div className="mx-8">
-                    <span>
+        <main className="flex min-h-screen justify-center px-4 pb-12 pt-28 text-sm md:px-6 md:text-base">
+            <div className="flex w-full max-w-2xl flex-col items-center">
+                <div className="w-full rounded-xl border border-border bg-card px-6 py-8 text-card-foreground shadow-sm md:px-8 md:py-10">
+                    <div className="font-serif text-base leading-8 text-foreground md:text-lg">
                         {poetry.map((poem, index) => (
-                            <p className="mb-4" key={index}>
+                            <p className="mb-5 last:mb-0" key={index}>
                                 {poem.content}
                             </p>
                         ))}
-                    </span>
+                    </div>
                 </div>
-                <div>
-                    <p className="text-center font-bold pb-5">jardarr</p>
+
+                <div className="mt-6">
+                    <p className="text-center text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                        jardarr
+                    </p>
                 </div>
-                <div className="my-5">
+
+                <div className="mt-6 overflow-hidden rounded-xl border border-border bg-card p-3 shadow-sm">
                     <ImageWithSkeleton
                         src="/jonaslaumarkussen.jpg"
                         alt="Изображение Одина скачущего на Слейпнире"

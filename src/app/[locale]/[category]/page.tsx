@@ -6,7 +6,12 @@ import categoryTitlesRaw from "../../utils/categoryLinks.json";
 import { pickTitle, type LocalizedTitle } from "../../utils/localeTitle";
 import { getTranslations } from "next-intl/server";
 
-const categories = ["about-gods", "about-heroes", "edda-songs", "edda-app"] as const;
+const categories = [
+    "about-gods",
+    "about-heroes",
+    "edda-songs",
+    "edda-app",
+] as const;
 type Category = (typeof categories)[number];
 const categoryTitles = categoryTitlesRaw as Record<Category, LocalizedTitle>;
 
@@ -16,7 +21,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { category, locale } = await params;
-    
+
     if (!categories.includes(category as Category)) {
         return { title: "Category not found" };
     }
@@ -31,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
     const { category, locale } = await params;
-    
+
     if (!categories.includes(category as Category)) {
         notFound();
     }
@@ -45,14 +50,23 @@ export default async function CategoryPage({ params }: Props) {
     const t = await getTranslations({ locale });
 
     return (
-        <main className="flex items-center justify-center text-sm md:text-base min-h-screen sm:h-fit">
-            <div className="flex flex-col items-center w-[600px] rounded-md mt-20 px-2 sm:px-0">
-                <div className="w-full flex flex-col gap-2 border border-1 rounded-xl p-4 border-amber-800/20 bg-amber-50 dark:bg-zinc-900 dark:border-zinc-800">
-                    <span className="uppercase text-xs text-amber-900/60 dark:text-amber-200/40">{t("Titles.Category")}</span>
-                    <h1 className="text-2xl text-zinc-900 dark:text-zinc-300">{cat.ON}</h1>
-                    <h2 className="text-base dark:text-zinc-400">{localeTitle}</h2>
+        <main className="flex min-h-screen items-start justify-center px-4 pt-24 pb-12 text-sm md:px-6 md:text-base">
+            <div className="flex w-full max-w-2xl flex-col items-center">
+                <div className="w-full rounded-xl border border-border bg-card p-5 text-card-foreground shadow-sm md:p-6">
+                    <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                        {t("Titles.Category")}
+                    </span>
+
+                    <h1 className="mt-3 font-serif text-2xl leading-tight text-foreground md:text-3xl">
+                        {cat.ON}
+                    </h1>
+
+                    <h2 className="mt-2 text-base text-muted-foreground md:text-lg">
+                        {localeTitle}
+                    </h2>
                 </div>
-                <nav className="flex flex-col items-center my-5 w-full">
+
+                <nav className="my-6 flex w-full flex-col items-center">
                     {poems.length > 0 ? (
                         poems.map((poem) => (
                             <Link
@@ -60,16 +74,21 @@ export default async function CategoryPage({ params }: Props) {
                                 href={`/${category}/${poem.data.slug}`}
                                 title={t(`Poems.${poem.key}.Title`)}
                                 aria-label={t(`Poems.${poem.key}.Title`)}
-                                className="w-full inline-flex justify-between border border-1 rounded-xl p-4 mb-4 border-amber-800/20 bg-amber-50 dark:bg-zinc-900 dark:border-zinc-800"
+                                className="mb-4 inline-flex w-full items-center justify-between rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-muted hover:text-foreground"
                             >
-                                <p className="dark:text-zinc-400">
+                                <p className="text-foreground/90">
                                     {t(`Poems.${poem.key}.Title`)}
                                 </p>
-                                <span className="text-amber-900 dark:text-amber-200/40">›</span>
+
+                                <span className="text-muted-foreground transition-colors group-hover:text-foreground">
+                                    ›
+                                </span>
                             </Link>
                         ))
                     ) : (
-                        <p className="text-center">No poems found</p>
+                        <p className="text-center text-muted-foreground">
+                            No poems found
+                        </p>
                     )}
                 </nav>
             </div>

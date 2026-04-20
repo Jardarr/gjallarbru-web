@@ -70,25 +70,25 @@ export default async function Home() {
         <>
             <Hero />
 
-            <section className="w-full bg-amber-50/60 px-6 py-16 dark:bg-neutral-950 md:py-24">
+            <section className="w-full bg-background px-6 py-16 md:py-24">
                 <div className="mx-auto max-w-3xl text-center">
-                    <p className="text-sm uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400">
+                    <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
                         {t("Greeting.eyebrow")}
                     </p>
 
-                    <h1 className="mt-4 font-serif text-4xl leading-tight text-neutral-900 dark:text-neutral-100 md:text-5xl">
+                    <h1 className="mt-4 font-serif text-4xl leading-tight text-foreground md:text-5xl lg:text-6xl">
                         Gjallarbru
                     </h1>
 
-                    <p className="mt-6 text-lg leading-8 text-neutral-800 dark:text-neutral-200 md:text-xl">
+                    <p className="mt-6 text-lg leading-8 text-foreground md:text-xl">
                         {t("Greeting.lead")}
                     </p>
 
-                    <p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-neutral-700 dark:text-neutral-300 md:text-lg">
+                    <p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
                         {t("Greeting.body")}
                     </p>
 
-                    <p className="mt-10 font-serif text-xl italic text-neutral-800 dark:text-neutral-200 md:text-2xl">
+                    <p className="mt-10 font-serif text-xl italic text-foreground/85 md:text-2xl">
                         {t("Greeting.closing")}
                     </p>
                 </div>

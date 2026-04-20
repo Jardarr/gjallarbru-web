@@ -37,16 +37,18 @@ export default function Toast() {
 
     return (
         <div
-            className={`min-w-80 text-xs sm:text-sm fixed left-1/2 -translate-x-1/2 top-20 sm:top-auto sm:bottom-20 sm:right-4 sm:left-auto sm:translate-x-0 bg-neutral-300/80 dark:bg-slate-800/70 border-transparent dark:border-teal-600 border p-4 rounded-lg shadow-lg z-50 transition-all duration-300 ease-out ${
+            className={[
+                "fixed left-1/2 top-20 z-50 min-w-80 -translate-x-1/2 rounded-xl border border-border bg-card p-4 text-xs text-card-foreground shadow-sm transition-all duration-300 ease-out sm:bottom-20 sm:left-auto sm:right-4 sm:top-auto sm:translate-x-0 sm:text-sm",
                 visible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-2"
-            }`}
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-2 opacity-0",
+            ].join(" ")}
         >
-            <p className="font-bold text-gray-600 dark:text-gray-200 mb-2">
+            <p className="mb-2 text-sm font-semibold text-foreground sm:text-base">
                 Встречайте - Gjallarbru 2.0!
             </p>
-            <p>
+
+            <p className="leading-6 text-muted-foreground">
                 Теперь кроме русского языка, добавлены переводы и на английский!
             </p>
         </div>

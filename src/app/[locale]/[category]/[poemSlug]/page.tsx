@@ -5,161 +5,234 @@ import onData from "../../../utils/on.json";
 import { notFound } from "next/navigation";
 import categoryLinksRaw from "../../../utils/categoryLinks.json";
 import { pickTitle, type LocalizedTitle } from "../../../utils/localeTitle";
+import { ChevronRight } from "lucide-react";
 
 type Props = {
-	params: Promise<{ locale: string; category: string; poemSlug: string }>;
+    params: Promise<{ locale: string; category: string; poemSlug: string }>;
 };
 
 const categoryLinks = categoryLinksRaw as Record<string, LocalizedTitle>;
 
 function findPoemBySlug(slug: string) {
-	const poems = onData.Poems as any;
-	for (const key in poems) {
-		if (poems[key].slug === slug) {
-			return { key, data: poems[key] };
-		}
-	}
-	return null;
+    const poems = onData.Poems as any;
+    for (const key in poems) {
+        if (poems[key].slug === slug) {
+            return { key, data: poems[key] };
+        }
+    }
+    return null;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { poemSlug } = await params;
-	const poem = findPoemBySlug(poemSlug);
+    const { poemSlug } = await params;
+    const poem = findPoemBySlug(poemSlug);
 
-	if (!poem) {
-		return { title: "Poem not found" };
-	}
+    if (!poem) {
+        return { title: "Poem not found" };
+    }
 
-	const t = await getTranslations(`Poems.${poem.key}`);
+    const t = await getTranslations(`Poems.${poem.key}`);
 
-	return {
-		title: `Gjallarbru | ${t("Title")}`,
-		description: t("Description"),
-		keywords: [`${t("Title")}`, "Elder Edda", "Старшая Эдда"],
-		authors: [{ name: "jardarr", url: "https://jardarr-portfolio.vercel.app/" }],
-		applicationName: "Gjallarbru | Elder Edda",
-		openGraph: {
-			title: `Gjallarbru | ${t("Title")}`,
-			description: t("Description"),
-			url: "https://gjallarbru.ru",
-			siteName: "Gjallarbru | Elder Edda",
-			images: [
-				{
-					url: "/og-logo.jpg",
-					width: 800,
-					height: 600,
-					alt: "Gjallarbru | Elder Edda",
-				},
-			],
-			locale: "ru-RU",
-			type: "website",
-		},
-		twitter: {
-			card: "summary_large_image",
-			title: `Gjallarbru | ${t("Title")}`,
-			description: t("Description"),
-			images: ["/og-logo.jpg"],
-		},
-		robots: {
-			index: true,
-			follow: true,
-			nocache: true,
-			googleBot: {
-				index: true,
-				follow: true,
-				noimageindex: false,
-				"max-snippet": -1,
-				"max-image-preview": "large",
-				"max-video-preview": -1,
-			},
-		},
-		alternates: {
-			canonical: `https://gjallarbru.ru/${poem.data.category}/${poemSlug}`,
-		},
-	};
+    return {
+        title: `Gjallarbru | ${t("Title")}`,
+        description: t("Description"),
+        keywords: [`${t("Title")}`, "Elder Edda", "Старшая Эдда"],
+        authors: [
+            { name: "jardarr", url: "https://jardarr-portfolio.vercel.app/" },
+        ],
+        applicationName: "Gjallarbru | Elder Edda",
+        openGraph: {
+            title: `Gjallarbru | ${t("Title")}`,
+            description: t("Description"),
+            url: "https://gjallarbru.ru",
+            siteName: "Gjallarbru | Elder Edda",
+            images: [
+                {
+                    url: "/og-logo.jpg",
+                    width: 800,
+                    height: 600,
+                    alt: "Gjallarbru | Elder Edda",
+                },
+            ],
+            locale: "ru-RU",
+            type: "website",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `Gjallarbru | ${t("Title")}`,
+            description: t("Description"),
+            images: ["/og-logo.jpg"],
+        },
+        robots: {
+            index: true,
+            follow: true,
+            nocache: true,
+            googleBot: {
+                index: true,
+                follow: true,
+                noimageindex: false,
+                "max-snippet": -1,
+                "max-image-preview": "large",
+                "max-video-preview": -1,
+            },
+        },
+        alternates: {
+            canonical: `https://gjallarbru.ru/${poem.data.category}/${poemSlug}`,
+        },
+    };
 }
 
 export default async function PoemPage({ params }: Props) {
-	const { locale, poemSlug } = await params;
-	const poem = findPoemBySlug(poemSlug);
+    const { locale, poemSlug } = await params;
+    const poem = findPoemBySlug(poemSlug);
 
-	if (!poem) {
-		notFound();
-	}
+    if (!poem) {
+        notFound();
+    }
 
-	const tPoem = await getTranslations(`Poems.${poem.key}`);
-	const tTitle = await getTranslations("Titles");
-	const categoryTitle = categoryLinks[poem.data.category];
-	const categoryLabel = categoryTitle ? pickTitle(locale, categoryTitle) : poem.data.category;
-	const onBlocks = poem.data.Texts || [];
-	const onTitle = poem.data.Title || "";
-	const translatedBlocksRaw = tPoem.raw("Texts");
-	const translatedBlocks = Array.isArray(translatedBlocksRaw) ? translatedBlocksRaw : Object.values(translatedBlocksRaw || {});
+    const tPoem = await getTranslations(`Poems.${poem.key}`);
+    const tTitle = await getTranslations("Titles");
+    const categoryTitle = categoryLinks[poem.data.category];
+    const categoryLabel = categoryTitle
+        ? pickTitle(locale, categoryTitle)
+        : poem.data.category;
+    const onBlocks = poem.data.Texts || [];
+    const onTitle = poem.data.Title || "";
+    const translatedBlocksRaw = tPoem.raw("Texts");
+    const translatedBlocks = Array.isArray(translatedBlocksRaw)
+        ? translatedBlocksRaw
+        : Object.values(translatedBlocksRaw || {});
 
-	return (
-		<main className="flex items-center justify-center text-sm md:text-base">
-			<div className="flex flex-col w-[600px] rounded-md mt-20 px-2 sm:px-0">
-				<span className="hidden sm:flex text-xs text-amber-900/60 dark:text-amber-200/40">
-					<Link className="hover:text-sky-500" href="/">
-						Gjallarbru
-					</Link>
-					&nbsp;/&nbsp;
-					<Link className="hover:text-sky-500" href={`/${locale}/${poem.data.category}`}>
-						{categoryLabel}
-					</Link>
-					&nbsp;/&nbsp;<span>{tPoem("Title")}</span>
-				</span>
-				<div className="w-full flex flex-col gap-2 border border-1 rounded-xl p-4 my-5 border-amber-800/20 bg-amber-50 dark:bg-zinc-900 dark:border-zinc-800">
-					<span className="uppercase text-xs text-amber-900/60 dark:text-amber-200/40">{tTitle("Poem")}</span>
-					<h1 className="text-2xl text-zinc-900 dark:text-zinc-300">{onTitle}</h1>
-					<h2 className="text-base dark:text-zinc-400">{tPoem("Title")}</h2>
-				</div>
-				<div className="w-full flex flex-col gap-2 border border-1 rounded-xl p-4 mb-5 border-amber-800/20 bg-amber-50 dark:bg-zinc-900 dark:border-zinc-800">
-					<span dangerouslySetInnerHTML={{ __html: tPoem.raw("Source") }} className="dark:text-zinc-400"></span>
-				</div>
-				{onBlocks.map((block: any) => {
-					const translated = translatedBlocks.find((b: any) => b.id === block.id);
+    return (
+        <main className="flex justify-center px-4 pb-12 pt-24 text-sm md:px-6 md:text-base">
+            <div className="flex w-full max-w-3xl flex-col rounded-md">
+                <span className="hidden text-xs text-muted-foreground sm:flex">
+                    <Link
+                        className="transition-colors hover:text-foreground"
+                        href="/"
+                    >
+                        Gjallarbru
+                    </Link>
+                    &nbsp;/&nbsp;
+                    <Link
+                        className="transition-colors hover:text-foreground"
+                        href={`/${locale}/${poem.data.category}`}
+                    >
+                        {categoryLabel}
+                    </Link>
+                    &nbsp;/&nbsp;
+                    <span className="text-foreground/80">{tPoem("Title")}</span>
+                </span>
 
-					const linesON = block.linesON || [];
-					const linesTranslated = locale === "ru" ? translated?.linesRU || [] : translated?.linesEN || [];
+                <div className="my-5 flex w-full flex-col gap-2 rounded-xl border border-border bg-card p-5 text-card-foreground shadow-sm md:p-6">
+                    <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                        {tTitle("Poem")}
+                    </span>
+                    <h1 className="font-serif text-2xl leading-tight text-foreground md:text-3xl">
+                        {onTitle}
+                    </h1>
+                    <h2 className="text-base text-muted-foreground md:text-lg">
+                        {tPoem("Title")}
+                    </h2>
+                </div>
 
-					if (block.type === "stanza") {
-						return (
-							<div key={block.id} className="flex justify-center mb-6">
-								{block.number && <div className="text-base mt-1">{block.number}</div>}
-								<div className="flex mt-1">
-									<div className="w-40 sm:w-60">
-										{linesON.map((line: string, i: number) => (
-											<p key={i}>{line}</p>
-										))}
-									</div>
-									{translated?.number && <div className="text-base">{translated.number}</div>}
-									<div className="w-40 sm:w-60">
-										{linesTranslated.map((line: string, i: number) => (
-											<p key={i}>{line}</p>
-										))}
-									</div>
-								</div>
-							</div>
-						);
-					}
+                <div className="flex w-full flex-col gap-2 rounded-xl border border-border bg-card p-5 text-card-foreground shadow-sm md:p-6">
+                    <span
+                        dangerouslySetInnerHTML={{
+                            __html: tPoem.raw("Source"),
+                        }}
+                        className="text-sm leading-7 text-muted-foreground"
+                    ></span>
+                </div>
 
-					return (
-						<div key={block.id} className="mb-6 mx-3 sm:mx-0">
-							<div className="text-base">
-								{linesON.map((line: string, i: number) => (
-									<p key={i}>{line}</p>
-								))}
-							</div>
-							<div className="mt-6">
-								{linesTranslated.map((line: string, i: number) => (
-									<p key={i}>{line}</p>
-								))}
-							</div>
-						</div>
-					);
-				})}
-			</div>
-		</main>
-	);
+                <div className="my-6 flex w-full items-center justify-between rounded-lg border border-border bg-muted/40 px-4 py-3">
+                    <p className="text-sm text-muted-foreground">
+                        Читайте Эдду оффлайн в приложении
+                    </p>
+
+                    <Link
+                        href="/app-link"
+                        className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                    >
+                        Открыть
+                        <ChevronRight className="ml-1 inline-block" />
+                    </Link>
+                </div>
+
+                {onBlocks.map((block: any) => {
+                    const translated = translatedBlocks.find(
+                        (b: any) => b.id === block.id,
+                    );
+
+                    const linesON = block.linesON || [];
+                    const linesTranslated =
+                        locale === "ru"
+                            ? translated?.linesRU || []
+                            : translated?.linesEN || [];
+
+                    if (block.type === "stanza") {
+                        return (
+                            <div
+                                key={block.id}
+                                className="mb-6 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm md:p-6"
+                            >
+                                <div className="flex justify-center gap-3 md:gap-6">
+                                    {block.number && (
+                                        <div className="w-3 shrink-0 text-sm text-muted-foreground md:text-base">
+                                            {block.number}
+                                        </div>
+                                    )}
+
+                                    <div className="flex gap-4 md:gap-8">
+                                        <div className="w-30 font-serif leading-7 text-foreground sm:w-60">
+                                            {linesON.map(
+                                                (line: string, i: number) => (
+                                                    <p key={i}>{line}</p>
+                                                ),
+                                            )}
+                                        </div>
+
+                                        {translated?.number && (
+                                            <div className="w-3 shrink-0 text-sm text-muted-foreground md:text-base">
+                                                {translated.number}
+                                            </div>
+                                        )}
+
+                                        <div className="w-30 leading-7 text-foreground/90 sm:w-60">
+                                            {linesTranslated.map(
+                                                (line: string, i: number) => (
+                                                    <p key={i}>{line}</p>
+                                                ),
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    }
+
+                    return (
+                        <div
+                            key={block.id}
+                            className="mb-6 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm md:p-6"
+                        >
+                            <div className="font-serif text-base leading-7 text-foreground">
+                                {linesON.map((line: string, i: number) => (
+                                    <p key={i}>{line}</p>
+                                ))}
+                            </div>
+
+                            <div className="mt-6 leading-7 text-foreground/90">
+                                {linesTranslated.map(
+                                    (line: string, i: number) => (
+                                        <p key={i}>{line}</p>
+                                    ),
+                                )}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </main>
+    );
 }
