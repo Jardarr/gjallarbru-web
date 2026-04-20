@@ -1,14 +1,19 @@
 {
     "HomePage": {
-        "Greeting": [
-            "Welcome to Gjallarbru — a portal inspired by ancient Scandinavian mythology and its profound bond between the human and the divine.",
-            "In the myths, Gjallarbrú is the bridge that crosses the river Gjöll leading to Helheim, the realm of the dead. Yet, in a symbolic sense, it is the path of understanding that connects us with the world of spirits, the memory of our ancestors, and the gods themselves. This website is our bridge — where ancient tales, images, and archetypes come alive, passed down through millennia. Myths are the link between the past and the present, where each of us may find our own way across this bridge — toward meaning, strength, and the inspiration of the Northern tradition.",
-            "Gjallarbru calls — walk with us."
-        ],
+        "Greeting": {
+            "eyebrow": "Northern mythology & poetry",
+            "lead":"Welcome to Gjallarbru — a portal inspired by ancient Scandinavian mythology and its profound bond between the human and the divine.",
+            "body": "In the myths, Gjallarbrú is the bridge that crosses the river Gjöll leading to Helheim, the realm of the dead. Yet, in a symbolic sense, it is the path of understanding that connects us with the world of spirits, the memory of our ancestors, and the gods themselves. This website is our bridge — where ancient tales, images, and archetypes come alive, passed down through millennia. Myths are the link between the past and the present, where each of us may find our own way across this bridge — toward meaning, strength, and the inspiration of the Northern tradition.",
+            "closing": "Gjallarbru calls — walk with us."
+        },
         "Metadata": {
             "title": "Gjallarbru | Elder Edda",
             "description": "Cattle die, and kinsmen die, And so one dies one's self; But a noble name will never die, If good renown one gets."
         }
+    },
+    "Titles": {
+        "Poem": "Poem",
+        "Category": "Chapter"
     },
     "Dictionary": {
         "Description": "Old Norse Dictionary. An online version of the classic Old Norse/Old Icelandic dictionary by Richard Cleasby and Guðbrand Vigfússon, originally published in 1874.",

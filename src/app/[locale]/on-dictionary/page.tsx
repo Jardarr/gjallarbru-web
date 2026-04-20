@@ -4,13 +4,17 @@ import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
     title: "Gjallarbru | Словарь",
-    description: "Словарь древнескандинавского языка. Онлайн-версия классического древнескандинавского/древнеисландского словаря Ричарда Клисби и Гудбранда Вигфуссона",
+    description:
+        "Словарь древнескандинавского языка. Онлайн-версия классического древнескандинавского/древнеисландского словаря Ричарда Клисби и Гудбранда Вигфуссона",
     keywords: ["Elder Edda, Старшая Эдда, Словарь"],
-    authors: [{ name: "jardarr", url: "https://jardarr-portfolio.vercel.app/" }],
+    authors: [
+        { name: "jardarr", url: "https://jardarr-portfolio.vercel.app/" },
+    ],
     applicationName: "Gjallarbru | Elder Edda",
     openGraph: {
         title: "Jardarr | Словарь",
-        description: "Словарь древнескандинавского языка. Онлайн-версия классического древнескандинавского/древнеисландского словаря Ричарда Клисби и Гудбранда Вигфуссона",
+        description:
+            "Словарь древнескандинавского языка. Онлайн-версия классического древнескандинавского/древнеисландского словаря Ричарда Клисби и Гудбранда Вигфуссона",
         url: "https://gjallarbru.ru",
         siteName: "Gjallarbru | Elder Edda",
         images: [
@@ -27,7 +31,8 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Gjallarbru | Словарь",
-        description: "Словарь древнескандинавского языка. Онлайн-версия классического древнескандинавского/древнеисландского словаря Ричарда Клисби и Гудбранда Вигфуссона",
+        description:
+            "Словарь древнескандинавского языка. Онлайн-версия классического древнескандинавского/древнеисландского словаря Ричарда Клисби и Гудбранда Вигфуссона",
         images: ["/og-logo.jpg"],
     },
     robots: {
@@ -56,17 +61,24 @@ export const viewport: Viewport = {
 };
 
 export default async function Home() {
-    const t = await getTranslations("Dictionary")
+    const t = await getTranslations("Dictionary");
+
     return (
-        <main className="flex items-center justify-center text-sm md:text-base min-h-screen sm:h-fit">
-            <div className="flex flex-col items-center w-[600px] rounded-md min-h-screen mt-20">
-                <div className="flex flex-col w-full p-8 sea-color text-center">
-                    <h1 className="text-2xl font-bold">Cleasby & Vigfusson Old Norse dictionary</h1>
-                    <p className="font-GoodVibes text-neutral-900 dark:text-neutral-200 text-xl mt-4">
+        <main className="flex min-h-screen justify-center px-4 pt-24 pb-12 text-sm md:px-6 md:text-base">
+            <div className="flex w-full max-w-2xl flex-col items-center">
+                <div className="w-full rounded-xl border border-border bg-card p-6 text-center text-card-foreground shadow-sm md:p-8">
+                    <h1 className="font-serif text-2xl leading-tight text-foreground md:text-3xl">
+                        Cleasby & Vigfusson Old Norse dictionary
+                    </h1>
+
+                    <p className="mt-4 text-lg text-muted-foreground md:text-xl">
                         {t("Description")}
                     </p>
                 </div>
-                <SearchInDict />
+
+                <div className="mt-8 w-full">
+                    <SearchInDict />
+                </div>
             </div>
         </main>
     );

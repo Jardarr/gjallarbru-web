@@ -14,14 +14,14 @@ export default function LanguageSwitcher() {
     };
 
     return (
-		<button
+        <button
             type="button"
             aria-label="Переключить язык"
             value={locale}
-			onClick={() => handleChange(locale === "ru" ? "en" : "ru")}
-			className="bg-neutral-500/30 dark:bg-neutral-700/30 p-2 rounded-lg sea-color dark:text-neutral-300 border border-transparent transition ease-in-out duration-300 hover:border-sky-400"
-		>
-			{locale === "ru" ? "EN" : "RU"}
-		</button>
+            onClick={() => handleChange(locale === "ru" ? "en" : "ru")}
+            className="inline-flex items-center justify-center rounded-md border border-border bg-background px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+            {locale === "ru" ? "EN" : "RU"}
+        </button>
     );
 }

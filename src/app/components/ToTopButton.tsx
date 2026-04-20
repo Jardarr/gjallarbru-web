@@ -24,11 +24,20 @@ export default function ToTopButton() {
     return (
         <button
             id="scrollToTopButton"
-            className={`fixed bottom-3 right-5 border border-transparent py-2 px-3 text-sm text-neutral-200 rounded-md focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition ease-in-out duration-300 bg-[#203E51] hover:border-sky-400 ${
-                isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-            onClick={scrollToTop}>
-            <ArrowUpToLine />
+            onClick={scrollToTop}
+            className={[
+                "fixed bottom-10 right-5 z-50",
+                "inline-flex items-center justify-center",
+                "rounded-md border border-border bg-card p-2",
+                "text-muted-foreground transition-all",
+                "hover:bg-muted hover:text-foreground",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "pointer-events-none opacity-0 translate-y-2",
+            ].join(" ")}
+        >
+            <ArrowUpToLine className="h-4 w-4" />
         </button>
     );
 }

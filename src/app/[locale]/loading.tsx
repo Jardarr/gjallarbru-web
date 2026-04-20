@@ -1,14 +1,12 @@
 export default function Loading() {
-	return (
-		<div className="custom-font w-full flex justify-center bg-main-bg bg-cover bg-fixed bg-top bg-no-repeat min-h-screen sm:h-fit">
-			<div className="w-full max-w-[1200px] px-4 md:px-0">
-				<div className="flex h-screen items-center justify-center py-16">
-					<div
-						className="h-10 w-10 rounded-full border-4 border-neutral-500 border-t-cyan-600 animate-spin"
-						aria-label="Loading"
-					/>
-				</div>
-			</div>
-		</div>
-	);
+    return (
+        <div className="flex min-h-screen w-full items-center justify-center bg-background">
+            <div className="flex items-center justify-center py-16">
+                <div
+                    className="h-10 w-10 animate-spin rounded-full border-4 border-muted border-t-primary"
+                    aria-label="Loading"
+                />
+            </div>
+        </div>
+    );
 }

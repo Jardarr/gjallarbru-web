@@ -3,74 +3,75 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --radius: 0.5rem;
-  }
+    :root {
+        --background: 40 35% 96%; /* фон страницы (бумага, основной фон) */
+        --foreground: 222 20% 12%; /* основной текст */
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-  }
+        --card: 40 30% 98%; /* фон карточек / блоков */
+        --card-foreground: 222 20% 12%; /* текст внутри карточек */
+
+        --muted: 40 20% 90%; /* вторичный фон (hover, плашки, подсветки) */
+        --muted-foreground: 220 10% 40%; /* вторичный текст (подписи, описание) */
+
+        --border: 32 18% 82%; /* границы, разделители */
+        --input: 32 18% 82%; /* границы input / полей */
+
+        --primary: 28 65% 42%; /* основной акцент (кнопки, активные элементы) */
+        --primary-foreground: 40 30% 96%; /* текст на акценте */
+
+        --accent: 28 55% 50%; /* дополнительный акцент (hover, выделение) */
+        --accent-foreground: 40 30% 98%; /* текст на дополнительном акценте */
+
+        --ring: 28 65% 42%; /* обводка фокуса (focus ring) */
+
+        --radius: 12px; /* радиус скругления */
+    }
+
+    .dark {
+        --background: 222 25% 8%; /* основной фон (глубокий тёмный, не чёрный) */
+        --foreground: 40 18% 90%; /* основной текст (светлый, мягкий) */
+
+        --card: 222 20% 11%; /* фон карточек */
+        --card-foreground: 40 18% 90%; /* текст в карточках */
+
+        --muted: 220 15% 16%; /* вторичный фон (hover, панели) */
+        --muted-foreground: 220 10% 65%; /* вторичный текст */
+
+        --border: 220 14% 22%; /* границы */
+        --input: 220 14% 22%; /* границы input */
+
+        --primary: 28 70% 55%; /* основной акцент (ярче для тёмной темы) */
+        --primary-foreground: 222 25% 8%; /* текст на акценте */
+
+        --accent: 28 60% 55%; /* дополнительный акцент */
+        --accent-foreground: 222 25% 8%; /* текст на акценте */
+
+        --ring: 28 70% 55%; /* фокус */
+    }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
 }
 
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #203E51 #000;
+    scrollbar-width: thin;
+    scrollbar-color: #74480a #000;
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 *::-webkit-scrollbar-track {
-  background: #000;
+    background: #000;
 }
 *::-webkit-scrollbar-thumb {
-  background-color: #242424;
-  border-radius: 10px;
-  border: 3px solid #000;
+    background-color: #242424;
+    border-radius: 10px;
+    border: 3px solid #000;
 }
