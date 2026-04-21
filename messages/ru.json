@@ -20,6 +20,31 @@
         "Loader": "Загрузка...",
         "EndMessage": "Это все результаты"
     },
+    "Application": {
+        "Type": "Приложение",
+        "Title": "Gjallarbru для Android",
+        "Description": "Читайте Старшую Эдду в удобном формате: оригинал и перевод рядом, оффлайн-доступ и режим чтения без отвлекающих элементов.",
+        "Block1": {
+            "Title": "Оффлайн-доступ",
+            "Description": "Читайте тексты без интернета"
+        },
+        "Block2": {
+            "Title": "Параллельный перевод",
+            "Description": "Оригинал и перевод рядом"
+        },
+        "Block3": {
+            "Title": "Удобное чтение",
+            "Description": "Без отвлекающих элементов"
+        },
+        "Download": "Скачать APK",
+        "Footer": "Бесплатно • Android",
+        "Metadata": {
+            "Title": "Gjallarbru | Android приложение",
+            "Description": "Gjallarbru для Android — Старшая Эдда в удобном формате: оффлайн-доступ, оригинал и перевод рядом.",
+            "Keywords": "Gjallarbru, Старшая Эдда, Elder Edda, Android приложение, древнескандинавский, древнеисландский, оффлайн чтение",
+            "Alt": "Gjallarbru для Android"
+        }
+    },
     "Titles": {
         "Poem": "Поэма",
         "Category": "Раздел"

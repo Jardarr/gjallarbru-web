@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         siteName: "Gjallarbru | Elder Edda",
         images: [
             {
-                url: "/og-logo.jpg",
+                url: "/og-logo.png",
                 width: 800,
                 height: 600,
                 alt: "Gjallarbru | Elder Edda",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         title: "Gjallarbru | Большая Эдда",
         description:
             "Эта книга является попыткой собрать под одной обложкой как можно большее число важнейших древних текстов, связанных с германо-скандинавской мифологией. ",
-        images: ["/og-logo.jpg"],
+        images: ["/og-logo.png"],
     },
     robots: {
         index: true,
