@@ -24,6 +24,31 @@
         "Loader": "Loading...",
         "EndMessage": "These are all the results"
     },
+    "Application": {
+        "Type": "Application",
+        "Title": "Gjallarbru for Android",
+        "Description": "Read the Elder Edda in a convenient format: original text and translation side by side, with offline access and a distraction-free reading mode.",
+        "Block1": {
+            "Title": "Offline access",
+            "Description": "Read texts without an internet connection"
+        },
+        "Block2": {
+            "Title": "Parallel translation",
+            "Description": "Original text and translation side by side"
+        },
+        "Block3": {
+            "Title": "Comfortable reading",
+            "Description": "Distraction-free reading experience"
+        },
+        "Download": "Download APK",
+        "Footer": "Free • Android",
+        "Metadata": {
+            "Title": "Gjallarbru | Android application",
+            "Description": "Gjallarbru for Android — the Elder Edda in a convenient format: offline access, original text and translation side by side.",
+            "Keywords": "Gjallarbru, Elder Edda, Android application, Old Norse, Old Icelandic, offline reading",
+            "Alt": "Gjallarbru for Android"
+        }
+    },
     "Poems": {
         "TheProphecyOfTheSeeress": {
             "Title": "The Prophecy of the Seeress",

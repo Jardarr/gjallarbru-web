@@ -2,99 +2,122 @@ import { Metadata, Viewport } from "next";
 import Hero from "../components/Hero";
 import { getTranslations } from "next-intl/server";
 import Toast from "../components/Toast";
+import JsonLd from "../components/seo/JsonLd";
+import { buildOrganizationJsonLd, buildWebsiteJsonLd, getHomeUrl } from "../utils/StructuredData";
 
-export async function generateMetadata(): Promise<Metadata> {
-    const t = await getTranslations("HomePage.Metadata");
-    return {
-        title: t("title"),
-        description: t("description"),
-        keywords: [
-            "Elder Edda, Старшая Эдда, Älteste Edda, Élder Edda, Anziana Edda, Anciã Edda, Edda Seanóir, Vanhin Edda, Eldri Edda, Äldste Edda, Eldste Edda",
-        ],
-        authors: [
-            { name: "jardarr", url: "https://jardarr-portfolio.vercel.app/" },
-        ],
-        applicationName: "Gjallarbru | Elder Edda",
-        openGraph: {
-            title: t("title"),
-            description: t("description"),
-            url: "https://gjallarbru.ru",
-            siteName: t("title"),
-            images: [
-                {
-                    url: "/og-logo.jpg",
-                    width: 800,
-                    height: 600,
-                    alt: t("title"),
-                },
-            ],
-            locale: "ru-RU",
-            type: "website",
-        },
-        twitter: {
-            card: "summary_large_image",
-            title: t("title"),
-            description: t("description"),
-            images: ["/og-logo.jpg"],
-        },
-        robots: {
-            index: true,
-            follow: true,
-            nocache: true,
-            googleBot: {
-                index: true,
-                follow: true,
-                noimageindex: false,
-                "max-snippet": -1,
-                "max-image-preview": "large",
-                "max-video-preview": -1,
-            },
-        },
-        alternates: {
-            canonical: "https://gjallarbru.ru",
-        },
-    };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+	const { locale } = await params;
+
+	const t = await getTranslations({
+		locale,
+		namespace: "HomePage.Metadata",
+	});
+
+	const title = t("title");
+	const description = t("description");
+
+	const path = locale === "ru" ? "/" : "/en";
+	const pageUrl = `https://gjallarbru.ru${path === "/" ? "" : path}`;
+
+	return {
+		title,
+		description,
+		keywords: ["Elder Edda", "Старшая Эдда", "Gjallarbru", "Old Norse", "древнескандинавский"],
+		authors: [
+			{
+				name: "jardarr",
+				url: "https://jardarr-portfolio.vercel.app/",
+			},
+		],
+		applicationName: "Gjallarbru | Elder Edda",
+
+		openGraph: {
+			title,
+			description,
+			url: pageUrl,
+			siteName: "Gjallarbru | Elder Edda",
+			images: [
+				{
+					url: "/og-logo.png",
+					width: 1200,
+					height: 630,
+					alt: title,
+				},
+			],
+			locale: locale === "ru" ? "ru_RU" : "en_US",
+			type: "website",
+		},
+
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: ["/og-logo.png"],
+		},
+
+		robots: {
+			index: true,
+			follow: true,
+			nocache: true,
+			googleBot: {
+				index: true,
+				follow: true,
+				noimageindex: false,
+				"max-snippet": -1,
+				"max-image-preview": "large",
+				"max-video-preview": -1,
+			},
+		},
+
+		alternates: {
+			canonical: pageUrl,
+			languages: {
+				ru: "https://gjallarbru.ru",
+				en: "https://gjallarbru.ru/en",
+			},
+		},
+	};
 }
 
 export const viewport: Viewport = {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
+	width: "device-width",
+	initialScale: 1,
+	maximumScale: 1,
+	userScalable: false,
 };
 
-export default async function Home() {
-    const t = await getTranslations("HomePage");
+type Props = {
+    params: Promise<{ locale: string }>;
+};
 
-    return (
-        <>
-            <Hero />
-
-            <section className="w-full bg-background px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-3xl text-center">
-                    <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
-                        {t("Greeting.eyebrow")}
-                    </p>
-
-                    <h1 className="mt-4 font-serif text-4xl leading-tight text-foreground md:text-5xl lg:text-6xl">
-                        Gjallarbru
-                    </h1>
-
-                    <p className="mt-6 text-lg leading-8 text-foreground md:text-xl">
-                        {t("Greeting.lead")}
-                    </p>
-
-                    <p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-                        {t("Greeting.body")}
-                    </p>
-
-                    <p className="mt-10 font-serif text-xl italic text-foreground/85 md:text-2xl">
-                        {t("Greeting.closing")}
-                    </p>
-                </div>
-            </section>
-
-            <Toast />
-        </>
-    );
+export default async function Home({ params }: Props) {
+	const { locale } = await params;
+    const t = await getTranslations({
+        locale,
+        namespace: "HomePage",
+    });
+    const homeUrl = getHomeUrl(locale);
+    const organizationJsonLd = buildOrganizationJsonLd();
+    const websiteJsonLd = buildWebsiteJsonLd({
+        locale,
+        name: "Gjallarbru | Elder Edda",
+        url: homeUrl,
+        searchUrlTemplate: "https://gjallarbru.ru/dictionary?query={search_term_string}",
+    });
+	return (
+		<main>
+            <JsonLd data={[organizationJsonLd, websiteJsonLd]} />
+			<Hero />
+			<section className="w-full bg-background px-6 py-16 md:py-24">
+				<div className="mx-auto max-w-3xl text-center">
+					<p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">{t("Greeting.eyebrow")}</p>
+					<h1 className="mt-4 font-serif text-4xl leading-tight text-foreground md:text-5xl lg:text-6xl">Gjallarbru</h1>
+					<p className="mt-6 text-lg leading-8 text-foreground md:text-xl">{t("Greeting.lead")}</p>
+					<p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">{t("Greeting.body")}</p>
+					<p className="mt-10 font-serif text-xl italic text-foreground/85 md:text-2xl">{t("Greeting.closing")}</p>
+				</div>
+			</section>
+			<Toast />
+		</main>
+	);
 }
