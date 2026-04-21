@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         siteName: "Gjallarbru | Elder Edda",
         images: [
             {
-                url: "/og-logo.png",
+                url: "og/og.jpg",
                 width: 800,
                 height: 600,
                 alt: "Gjallarbru | Elder Edda",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         title: "Gjallarbru | Словарь",
         description:
             "Словарь древнескандинавского языка. Онлайн-версия классического древнескандинавского/древнеисландского словаря Ричарда Клисби и Гудбранда Вигфуссона",
-        images: ["/og-logo.png"],
+        images: ["og/og.jpg"],
     },
     robots: {
         index: true,

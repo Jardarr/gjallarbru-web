@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         siteName: "Gjallarbru | Elder Edda",
         images: [
             {
-                url: "/og-logo.png",
+                url: "og/og.jpg",
                 width: 800,
                 height: 600,
                 alt: "Gjallarbru | Elder Edda",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         title: "Gjallarbru | Два ворона",
         description:
             "И Одаля столбы приобретали силу Поставленные крепкою рукой А недалече, под лысою горой Пролили Бло́том кровь",
-        images: ["/og-logo.png"],
+        images: ["og/og.jpg"],
     },
     robots: {
         index: true,

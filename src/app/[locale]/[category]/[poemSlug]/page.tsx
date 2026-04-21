@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			siteName: "Gjallarbru | Elder Edda",
 			images: [
 				{
-					url: "/og-logo.png",
+					url: "og/og.jpg",
 					width: 1200,
 					height: 630,
 					alt: `Gjallarbru | ${title}`,
@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			card: "summary_large_image",
 			title: `Gjallarbru | ${title}`,
 			description,
-			images: ["/og-logo.png"],
+			images: ["og/og.jpg"],
 		},
 		robots: {
 			index: true,
