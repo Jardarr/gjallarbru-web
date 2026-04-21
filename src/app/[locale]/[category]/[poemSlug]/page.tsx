@@ -6,9 +6,8 @@ import { notFound } from "next/navigation";
 import categoryLinksRaw from "../../../utils/categoryLinks.json";
 import { pickTitle, type LocalizedTitle } from "../../../utils/localeTitle";
 import { ChevronRight } from "lucide-react";
-import { getAbsoluteUrl, getLocalizedPath } from "@/src/app/utils/LocaleHelper";
 import JsonLd from "@/src/app/components/seo/JsonLd";
-import { buildBreadcrumbJsonLd, buildCreativeWorkJsonLd, getCategoryUrl, getHomeBreadcrumbName, getPoemUrl } from "@/src/app/utils/StructuredData";
+import { buildBreadcrumbJsonLd, buildCreativeWorkJsonLd, getAbsoluteUrl, getCategoryUrl, getHomeBreadcrumbName, getLocalizedPath, getPoemUrl } from "@/src/app/utils/StructuredData";
 
 type Props = {
 	params: Promise<{ locale: string; category: string; poemSlug: string }>;
@@ -146,7 +145,7 @@ export default async function PoemPage({ params }: Props) {
 	const translatedBlocks = Array.isArray(translatedBlocksRaw) ? translatedBlocksRaw : Object.values(translatedBlocksRaw || {});
 
 	const homePath = getLocalizedPath(locale, "/");
-	const homeUrl = getAbsoluteUrl(homePath === "/" ? "" : homePath);
+	const homeUrl = getAbsoluteUrl(homePath);
 	const categoryPath = getLocalizedPath(locale, `/${poem.data.category}`);
 	const appPath = getLocalizedPath(locale, "/app-link");
 

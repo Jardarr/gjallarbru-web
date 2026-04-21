@@ -1,9 +1,8 @@
+import type { Metadata, Viewport } from "next";
 import { Github } from "lucide-react";
 import Link from "next/link";
-import SES from "../../components/ses";
-import { Metadata, Viewport } from "next";
+import SES from "../../components/Ses";
 import { getTranslations } from "next-intl/server";
-import { getAbsoluteUrl, getLocalizedPath } from "../../utils/LocaleHelper";
 import JsonLd from "../../components/seo/JsonLd";
 import { buildBreadcrumbJsonLd, buildSoftwareApplicationJsonLd, getAppPageUrl, getHomeBreadcrumbName, getHomeUrl } from "../../utils/StructuredData";
 
@@ -22,8 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 		.map((kw: string) => kw.trim());
 	const alt = t("Metadata.Alt");
 
-	const path = locale === "ru" ? "/app-link" : "/en/app-link";
-	const pageUrl = `https://gjallarbru.ru${path}`;
+	const pageUrl = getAppPageUrl(locale);
 
 	return {
 		title: `Gjallarbru | ${title}`,
@@ -90,57 +88,58 @@ export const viewport: Viewport = {
 
 export default async function AppPromo({ params }: Props) {
 	const { locale } = await params;
-	const t = await getTranslations("Application");
+	const t = await getTranslations({ locale, namespace: "Application" });
+
 	const title = t("Title");
 	const description = t("Metadata.Description");
 
 	const homeUrl = getHomeUrl(locale);
-    const appUrl = getAppPageUrl(locale);
+	const appUrl = getAppPageUrl(locale);
+
 	const breadcrumbJsonLd = buildBreadcrumbJsonLd({
-        items: [
-            {
-                name: getHomeBreadcrumbName(locale),
-                url: homeUrl,
-            },
-            {
-                name: title,
-                url: appUrl,
-            },
-        ],
-    });
+		items: [
+			{
+				name: getHomeBreadcrumbName(locale),
+				url: homeUrl,
+			},
+			{
+				name: title,
+				url: appUrl,
+			},
+		],
+	});
 
 	const appJsonLd = buildSoftwareApplicationJsonLd({
-        name: title,
-        url: appUrl,
-        description,
-        image: "https://gjallarbru.ru/og-app.png",
-        downloadUrl: "https://github.com/Jardarr/gjallarbru/releases",
-    });
+		name: title,
+		url: appUrl,
+		description,
+		image: "https://gjallarbru.ru/og-app.png",
+		downloadUrl: "https://github.com/Jardarr/gjallarbru/releases",
+	});
+
 	return (
 		<>
 			<JsonLd data={[breadcrumbJsonLd, appJsonLd]} />
-			<main className="mx-auto w-full max-w-4xl px-4 py-12 mt-4">
+
+			<main className="mx-auto mt-4 w-full max-w-4xl px-4 py-12">
 				<div className="rounded-xl border border-border bg-card p-6 text-card-foreground shadow-sm md:p-10">
-					{/* Заголовок */}
 					<div className="text-center">
 						<p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{t("Type")}</p>
 
-						<h2 className="mt-3 font-serif text-3xl leading-tight text-foreground md:text-4xl">{t("Title")}</h2>
+						<h1 className="mt-3 font-serif text-3xl leading-tight text-foreground md:text-4xl">{title}</h1>
 
-						<p className="mx-auto mt-4 max-w-2xl text-muted-foreground leading-7">{t("Description")}</p>
+						<p className="mx-auto mt-4 max-w-2xl leading-7 text-muted-foreground">{t("Description")}</p>
 					</div>
 
-					{/* Скриншоты */}
-					<div className="mt-8 flex sm:justify-center gap-4 overflow-x-auto pb-2">
-						<img src="/screenshots/scr-1.jpg" alt="Скриншот приложения-1" className="h-64 rounded-lg border border-border object-cover" />
-						<img src="/screenshots/scr-2.jpg" alt="Скриншот приложения-2" className="h-64 rounded-lg border border-border object-cover" />
-						<img src="/screenshots/scr-3.jpg" alt="Скриншот приложения-3" className="h-64 rounded-lg border border-border object-cover" />
-						<img src="/screenshots/scr-4.jpg" alt="Скриншот приложения-4" className="h-64 rounded-lg border border-border object-cover" />
-						<img src="/screenshots/scr-5.jpg" alt="Скриншот приложения-5" className="h-64 rounded-lg border border-border object-cover" />
+					<div className="mt-8 flex gap-4 overflow-x-auto pb-2 sm:justify-center">
+						<img src="/screenshots/scr-1.jpg" alt={`${title} screenshot 1`} className="h-64 rounded-lg border border-border object-cover" />
+						<img src="/screenshots/scr-2.jpg" alt={`${title} screenshot 2`} className="h-64 rounded-lg border border-border object-cover" />
+						<img src="/screenshots/scr-3.jpg" alt={`${title} screenshot 3`} className="h-64 rounded-lg border border-border object-cover" />
+						<img src="/screenshots/scr-4.jpg" alt={`${title} screenshot 4`} className="h-64 rounded-lg border border-border object-cover" />
+						<img src="/screenshots/scr-5.jpg" alt={`${title} screenshot 5`} className="h-64 rounded-lg border border-border object-cover" />
 					</div>
 
-					{/* Преимущества */}
-					<div className="mt-8 grid gap-4 sm:grid-cols-3 text-sm">
+					<div className="mt-8 grid gap-4 text-sm sm:grid-cols-3">
 						<div className="rounded-lg border border-border bg-muted/40 p-4">
 							<p className="font-medium text-foreground">{t("Block1.Title")}</p>
 							<p className="mt-1 text-muted-foreground">{t("Block1.Description")}</p>
@@ -157,26 +156,25 @@ export default async function AppPromo({ params }: Props) {
 						</div>
 					</div>
 
-					{/* Кнопки */}
 					<div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
 						<Link
 							href="https://github.com/Jardarr/gjallarbru/releases"
 							target="_blank"
-							className="w-full max-w-40 sm:w-auto inline-flex items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90">
+							className="inline-flex w-full max-w-40 items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90 sm:w-auto">
 							{t("Download")}
 						</Link>
 
 						<Link
 							href="https://github.com/Jardarr/gjallarbru"
 							target="_blank"
-							className="w-full max-w-40 sm:w-auto inline-flex items-center justify-center rounded-md border border-border px-5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+							className="inline-flex w-full max-w-40 items-center justify-center rounded-md border border-border px-5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-auto">
 							GitHub
 							<Github className="ml-2 h-4 w-4" />
 						</Link>
 					</div>
 
-					{/* Микро текст */}
 					<p className="mt-4 text-center text-xs text-muted-foreground">{t("Footer")}</p>
+
 					<div className="mt-8 flex items-center justify-center">
 						<SES />
 					</div>
