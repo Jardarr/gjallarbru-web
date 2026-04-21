@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 			siteName: "Gjallarbru | Elder Edda",
 			images: [
 				{
-					url: "/og-logo.png",
+					url: "og/og.jpg",
 					width: 1200,
 					height: 630,
 					alt: title,
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 			card: "summary_large_image",
 			title,
 			description,
-			images: ["/og-logo.png"],
+			images: ["og/og.jpg"],
 		},
 
 		robots: {
