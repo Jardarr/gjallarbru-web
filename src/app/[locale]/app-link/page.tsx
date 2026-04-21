@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Github } from "lucide-react";
 import Link from "next/link";
-import SES from "../../components/SES";
+import SES from "../../components/Ses";
 import { getTranslations } from "next-intl/server";
 import JsonLd from "../../components/seo/JsonLd";
 import { buildBreadcrumbJsonLd, buildSoftwareApplicationJsonLd, getAppPageUrl, getHomeBreadcrumbName, getHomeUrl } from "../../utils/StructuredData";
