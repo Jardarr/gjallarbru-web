@@ -49,6 +49,9 @@
         "Poem": "Поэма",
         "Category": "Раздел"
     },
+    "TopBanner": {
+        "Link": "Теперь доступно оффлайн приложение"
+    },
     "Poems": {
         "TheProphecyOfTheSeeress": {
             "Title": "Прорицание вёльвы",

@@ -49,6 +49,9 @@
             "Alt": "Gjallarbru for Android"
         }
     },
+    "TopBanner": {
+        "Link": "Offline application is now available"
+    },
     "Poems": {
         "TheProphecyOfTheSeeress": {
             "Title": "The Prophecy of the Seeress",
