@@ -18,19 +18,14 @@ export default function Header() {
         <header className="absolute inset-x-0 top-0 z-50 w-full border-b border-border/50 bg-background/70 px-4 py-2 backdrop-blur-md md:px-24">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                    <Link href="/" aria-label="Главная страница Gjallarbru">
+                    <Link href="/">
                         <Image
-                            className="mx-2 h-5 w-auto opacity-80 transition-opacity hover:opacity-100"
-                            src="/thmr.svg"
-                            width={24}
-                            height={24}
-                            alt="Логотип Gjallarbru"
+                            src="/gold-bridge.png"
+                            alt="Gjallarbru"
+                            width={50}
+                            height={30}
                         />
                     </Link>
-
-                    <span className="font-Goth w-10 text-xs/3 uppercase tracking-wide text-foreground sm:w-auto sm:text-xl">
-                        GJALLARBRU
-                    </span>
                 </div>
 
                 <nav className="flex items-center">
@@ -46,7 +41,6 @@ export default function Header() {
                                     href={link.href}
                                     aria-label={link.aria}
                                     title={link.aria}
-                                    translate="no"
                                     className={[
                                         "group relative px-1 py-1 text-sm font-medium transition-colors",
                                         isActive

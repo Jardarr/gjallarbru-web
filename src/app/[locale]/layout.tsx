@@ -7,6 +7,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 import "../globals.css";
+import TopBanner from "../components/TopBanner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,8 @@ export default async function LocaleLayout({ children, params }: Props) {
             >
                 <NextIntlClientProvider locale={locale}>
                     <Provider>
+                        <TopBanner />
+
                         <div className="sticky top-0 z-50">
                             <Header />
                         </div>
