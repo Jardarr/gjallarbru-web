@@ -1,4 +1,3 @@
-import React from "react";
 import { poetry } from "./page.utils";
 import { Metadata, Viewport } from "next";
 import ImageWithSkeleton from "../../../app/components/ImageWithSkeleton";
