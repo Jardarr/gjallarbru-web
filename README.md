@@ -1,4 +1,6 @@
-# 🌉 Gjallarbru
+<p align="center">
+  <img src="public/gold-bridge.png" alt="Gjallarbru" width="250" />
+</p>
 
 Мультиязычное приложение для чтения и изучения древнескандинавских текстов (поэзия и проза) с синхронизированными переводами и удобным интерфейсом.
 
@@ -7,10 +9,10 @@
 ## 🚀 Репозитории проекта
 
 ### 🌐 Web версия (Next.js)
-👉 https://github.com/Jardarr/elderedda
+👉 https://github.com/Jardarr/gjallarbru-web
 
 ### 📱 Mobile приложение (React Native / Expo)
-👉 https://github.com/Jardarr/gjallarbru
+👉 https://github.com/Jardarr/gjallarbru-app
 
 ---
 
