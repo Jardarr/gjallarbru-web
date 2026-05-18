@@ -158,14 +158,14 @@ export default async function AppPromo({ params }: Props) {
 
 					<div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
 						<Link
-							href="https://github.com/Jardarr/gjallarbru/releases"
+							href="https://github.com/Jardarr/gjallarbru-app/releases"
 							target="_blank"
 							className="inline-flex w-full max-w-40 items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90 sm:w-auto">
 							{t("Download")}
 						</Link>
 
 						<Link
-							href="https://github.com/Jardarr/gjallarbru"
+							href="https://github.com/Jardarr/gjallarbru-app"
 							target="_blank"
 							className="inline-flex w-full max-w-40 items-center justify-center rounded-md border border-border px-5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-auto">
 							GitHub
