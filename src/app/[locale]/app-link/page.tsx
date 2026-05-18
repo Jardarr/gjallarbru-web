@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Github } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import SES from "../../components/ses";
 import { getTranslations } from "next-intl/server";
 import JsonLd from "../../components/seo/JsonLd";
@@ -160,16 +160,17 @@ export default async function AppPromo({ params }: Props) {
 						<Link
 							href="https://github.com/Jardarr/gjallarbru-app/releases"
 							target="_blank"
-							className="inline-flex w-full max-w-40 items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90 sm:w-auto">
-							{t("Download")}
+							className="inline-flex w-full max-w-40 items-center justify-center rounded-md bg-zinc-950 border border-border px-5 py-2 text-sm font-bold text-zinc-100 transition-colors hover:bg-zinc-800 sm:w-auto">
+							<Image src="/github.png" alt="github_release" width={24} height={24} className="mr-2"/>
+							GitHub
 						</Link>
 
 						<Link
-							href="https://github.com/Jardarr/gjallarbru-app"
+							href="https://www.rustore.ru/catalog/app/com.jardarr.gjallarbru"
 							target="_blank"
-							className="inline-flex w-full max-w-40 items-center justify-center rounded-md border border-border px-5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-auto">
-							GitHub
-							<Github className="ml-2 h-4 w-4" />
+							className="inline-flex w-full max-w-40 items-center justify-center rounded-md bg-zinc-100 border border-border px-5 py-2 text-sm font-bold text-zinc-950 transition-colors hover:bg-zinc-200 sm:w-auto">
+							<Image src="/rustore.png" alt="rustore_release" width={24} height={24} className="mr-2"/>
+							RuStore
 						</Link>
 					</div>
 
